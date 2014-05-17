@@ -1,6 +1,12 @@
-CETA:
-CIRCLE ENCRYPTION TRANSFER ALGORITHM
-v3.0 by Scelesto 2013-2014
+       _______  _______  _______  _______ 
+      |       ||       ||       ||   _   |
+      |       ||    ___||_     _||  |_|  |
+      |       ||   |___   |   |  |       |
+      |      _||    ___|  |   |  |       |
+      |     |_ |   |___   |   |  |   _   |
+      |_______||_______|  |___|  |__| |__|
+      CIRCLE ENCRYPTION TRANSFER ALGORITHM
+      v3.0 by Scelesto 2013-2014
 
 README:
 
@@ -96,7 +102,7 @@ Enter the following commands:
     
     #Install CETA
     /python
-    import sys,os,shutil
+    import os,shutil
     os.system('wget tiny.cc/CETA')
     os.rename('CETA','CETA.py')
     shutil.move('CETA.py','/opt/python3.3/lib/python3.3')
