@@ -83,7 +83,7 @@ class CETA:
             for j in range(0,len(cy)): #multiply and add
                 r+=cy[j]*cx[j]
             f.append(r) #place in new matrix
-        return f #return resultiing array
+        return f #return resulting array
 
     #STORAGE FUNCTIONS:
     fname='ceta_tmp' #the default temp file name
