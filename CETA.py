@@ -7,6 +7,7 @@
 #|_______||_______|  |___|  |__| |__|
 #CIRCLE ENCRYPTION TRANSFER ALGORITHM
 #v3.0 by Scelesto 2013-2014
+#(Requires Python 3)
 
 #GET OTHER MODULES:
 import fractions,pickle,random,os,logging,shutil,sys
