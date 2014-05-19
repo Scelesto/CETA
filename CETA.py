@@ -36,23 +36,23 @@ class CETA:
         return {'g':g,'n':n,'c':c,'a':a}
     hx=['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'] #Allows conversion of integer to hexadecimal character (e.g. 14->'E')
     def exm(s,e,m): #equivalent to (s**e)%m, but much faster
-        d=m
-        n=m
+        n=m #n is set as a clone of the modulus
+        #the euler phi function for m is calculated:
         q=1
         u=1
         for i in range(2,int(n/2)):
             while n%i==0:
-                if u%i!=0:
+                if u%i!=0: #if i is a unique prime factor of m
                     q*=i-1
                     u*=i
                 n=int(n/i)
-            if n<i:
+            if n<i: #if no more prime factors are possible
                 break
         if n>2 and u%n!=0:
             q*=n-1
             u*=n
-        p=int((d*q)/u)
-        return ((s%m)**(e%p))%m
+        p=int((m*q)/u) #phi(m)
+        return (s%m)**(e%p))%m
     def shx(s): #converts each character in a string to two hexadecimal characters
         o=""
         h=CETA.hx
