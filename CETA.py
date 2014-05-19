@@ -7,11 +7,9 @@
 #|_______||_______|  |___|  |__| |__|
 #CIRCLE ENCRYPTION TRANSFER ALGORITHM
 #v3.0 by Scelesto 2013-2014
-#(Requires Python 3)
 
 #GET OTHER MODULES:
-import fractions,pickle,random,os,logging,shutil,sys
-from time import sleep
+import pickle,random,os,logging,shutil,sys,time
 
 #PRIMARY CLASS
 class CETA:
@@ -37,14 +35,24 @@ class CETA:
             return {'g':g,'n':n,'c':c}
         return {'g':g,'n':n,'c':c,'a':a}
     hx=['0','1','2','3','4','5','6','7','8','9','A','B','C','D','E','F'] #Allows conversion of integer to hexadecimal character (e.g. 14->'E')
-    def phi(n): #the euler phi function
-        a=0
-        for k in range(1,n+1):
-            if fractions.gcd(n,k)==1:
-                a+=1
-        return a
     def exm(s,e,m): #equivalent to (s**e)%m, but much faster
-        return ((s%m)**(e%(CETA.phi(m))))%m
+        d=m
+        n=m
+        q=1
+        u=1
+        for i in range(2,int(n/2)):
+            while n%i==0:
+                if u%i!=0:
+                    q*=i-1
+                    u*=i
+                n=int(n/i)
+            if n<i:
+                break
+        if n>2 and u%n!=0:
+            q*=n-1
+            u*=n
+        p=int((d*q)/u)
+        return ((s%m)**(e%p))%m
     def shx(s): #converts each character in a string to two hexadecimal characters
         o=""
         h=CETA.hx
@@ -84,7 +92,7 @@ class CETA:
             for j in range(0,len(cy)): #multiply and add
                 r+=cy[j]*cx[j]
             f.append(r) #place in new matrix
-        return f #return resulting array
+        return f #return resultiing array
 
     #STORAGE FUNCTIONS:
     fname='ceta_tmp' #the default temp file name
@@ -113,7 +121,7 @@ class CETA:
                 if r!=CETA.fc: #if the contents of the file have changed
                     c=True #the other system is done.  time to work.
                 CETA.fc=r #sets the current file contents
-            sleep(0.1) #makes it less likely for more than one process to access the file simultaneously
+            time.sleep(0.1) #makes it less likely for more than one process to access the file simultaneously
         return f() #runs the next part of the algorithm
 
     #THE CIRCLE ENCRYPTION TRANSFER ALGORITHM:
